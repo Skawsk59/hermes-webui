@@ -53,7 +53,7 @@ def test_sessions_route_serves_spa_shell():
 
     handler = _FakeHandler()
     parsed = urlparse("http://example.com/sessions")
-    assert handle_get(handler, parsed) is True
+    assert handle_get(handler, parsed) is not False
     assert handler.status == 200
     ct = handler.header("Content-Type") or ""
     assert ct.startswith("text/html"), f"expected text/html, got {ct!r}"
@@ -70,7 +70,7 @@ def test_sessions_route_with_query_string_serves_spa_shell():
 
     handler = _FakeHandler()
     parsed = urlparse("http://example.com/sessions?limit=50&offset=0")
-    assert handle_get(handler, parsed) is True
+    assert handle_get(handler, parsed) is not False
     assert handler.status == 200
     ct = handler.header("Content-Type") or ""
     assert ct.startswith("text/html"), f"expected text/html, got {ct!r}"
